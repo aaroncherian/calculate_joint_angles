@@ -1,0 +1,13 @@
+[project]
+name = "calculate-joint-angles"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "scipy>=1.17.1",
+    "skellymodels",
+]
+
+[tool.uv.sources]
+skellymodels = { git = "https://github.com/aaroncherian/skellymodels" }
