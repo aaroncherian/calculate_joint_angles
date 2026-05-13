@@ -393,3 +393,5 @@ A typical workflow is:
 output_data/data_analysis/joint_angles/
 ```
 
+## Notes
+Because of the nature of joint angles with markerless data, I recommend some caution with intepreting inversion/eversion and abduction/adduction angles. These are often noisier than flexion/extension angles because we don't have as many reference points to correctly calculate all our necessary axes from, and may not be as reliable for downstream analysis.
