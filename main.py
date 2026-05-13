@@ -40,30 +40,33 @@ def save_data(
     path_to_joint_angles_data.mkdir(parents=True, exist_ok=True)
     angles_dataframe.to_csv(path_to_joint_angles_data/f"{tracker}_joint_angles.csv", index=False)
 
-path_to_recording = r"D:\validation\data\2025-11-04_ATC\2025-11-04_15-33-01_GMT-5_atc_treadmill_1"
-neutral_stance_frames = range(0,100) #set to some range where the person is standing still to normalize joint angles OR use neutral_stance_frames = None
-
-human:Human = load_data(path_to_recording=path_to_recording)
-
-angles_dataframe = calculate_joint_angles(human, 
-                                          neutral_stance_frames=neutral_stance_frames)
-
-visualize_data(
-    human=human,
-    angles_dataframe=angles_dataframe,
-    trajectory_markers=[
-        "left_hip", "left_knee", "left_ankle",
-        "right_hip", "right_knee", "right_ankle",
-        "left_heel", "right_heel",
-    ],
-    fps=30,
-)
 
 
-save_data(angles_dataframe, path_to_recording, tracker="mediapipe")
+def main(path_to_recording:str|Path, neutral_stance_frames: range|None):
+    human:Human = load_data(path_to_recording=path_to_recording)
+
+    angles_dataframe = calculate_joint_angles(human, 
+                                            neutral_stance_frames=neutral_stance_frames)
+
+    visualize_data(
+        human=human,
+        angles_dataframe=angles_dataframe,
+        trajectory_markers=[
+            "left_hip", "left_knee", "left_ankle",
+            "right_hip", "right_knee", "right_ankle",
+            "left_heel", "right_heel",
+        ],
+        fps=30,
+    )
 
 
+    save_data(angles_dataframe, path_to_recording, tracker="mediapipe")
 
+
+if __name__ == "__main__":
+    path_to_recording = r"D:\validation\data\2025-11-04_ATC\2025-11-04_15-33-01_GMT-5_atc_treadmill_1"
+    neutral_stance_frames = range(0,100) #set to some range where the person is standing still to normalize joint angles OR use neutral_stance_frames = None
+    main(path_to_recording, neutral_stance_frames)
 
 f= 2
 
